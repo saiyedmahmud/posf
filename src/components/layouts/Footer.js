@@ -12,7 +12,7 @@ function Footer() {
 					<p className={styles.copyrightText}>
 						{year}{" "}
 						<a
-							href='https://solution.omega.ac'
+							href='https://iamtakdir.xyz'
 							className='font-weight-bold'
 							target='_blank'
 							rel='noreferrer'>

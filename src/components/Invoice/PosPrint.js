@@ -90,7 +90,7 @@ const PrintToPdf = forwardRef(({ data, invoiceData, vatAmount }, ref) => {
 							<td>{data.totalAmount - data.discount}</td>
 						</tr>
 					</table>
-					{invoiceData?.footer} <br />© ERPOS | Potato Squad
+					{invoiceData?.footer} <br />© Potato Squad
 				</div>
 			</div>
 		</Fragment>

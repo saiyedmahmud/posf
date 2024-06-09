@@ -169,31 +169,31 @@ const Sidenav = ({ color, sideNavOpenKeys }) => {
 		//   key: "vat/tax",
 		//   icon: <MoneyCollectOutlined />,
 		// },
-		// (hasPermission("create-account") || hasPermission("readAll-account")) && {
-		//   label: "ACCOUNTS",
-		//   key: "accounts",
-		//   icon: <WalletOutlined />,
-		//   children: [
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/account/'>
-		//           <span>Account</span>
-		//         </NavLink>
-		//       ),
-		//       key: "accountList",
-		//       icon: <UnorderedListOutlined />,
-		//     },
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/transaction/'>
-		//           <span>Transaction</span>
-		//         </NavLink>
-		//       ),
-		//       key: "transactionList",
-		//       icon: <UnorderedListOutlined />,
-		//     },
-		//   ],
-		// },
+		(hasPermission("create-account") || hasPermission("readAll-account")) && {
+			label: "TRANSACTIONS",
+			key: "accounts",
+			icon: <WalletOutlined />,
+			children: [
+				// {
+				//   label: (
+				//     <NavLink to='/admin/account/'>
+				//       <span>Account</span>
+				//     </NavLink>
+				//   ),
+				//   key: "accountList",
+				//   icon: <UnorderedListOutlined />,
+				// },
+				{
+					label: (
+						<NavLink to='/admin/transaction/'>
+							<span>Transaction</span>
+						</NavLink>
+					),
+					key: "transactionList",
+					icon: <UnorderedListOutlined />,
+				},
+			],
+		},
 		// {
 		//   label: "REPORT",
 		//   key: "report",
@@ -229,78 +229,78 @@ const Sidenav = ({ color, sideNavOpenKeys }) => {
 		//   ],
 		// },
 
-		// (hasPermission("create-user") || hasPermission("readAll-user")) && {
-		//   label: "HR",
-		//   key: "hr",
-		//   icon: <TeamOutlined />,
-		//   children: [
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/hr/staffs'>
-		//           <span>Staffs</span>
-		//         </NavLink>
-		//       ),
-		//       key: "staffs",
-		//       icon: <UsergroupAddOutlined />,
-		//     },
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/role'>
-		//           <span>Role & Permissions</span>
-		//         </NavLink>
-		//       ),
-		//       key: "roleAndPermissions",
-		//       icon: <UserSwitchOutlined />,
-		//     },
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/designation/'>
-		//           <span>Designation</span>
-		//         </NavLink>
-		//       ),
-		//       key: "designation",
-		//       icon: <SolutionOutlined />,
-		//     },
-		//   ],
-		// },
-
-		(hasPermission("create-saleInvoice") ||
-		  hasPermission("readAll-saleInvoice")) && {
-		  label: (
-		    <NavLink to='/admin/pos'>
-		      <span>POS</span>
-		    </NavLink>
-		  ),
-		  key: "pos",
-		  icon: <ShoppingCartOutlined />,
+		(hasPermission("create-user") || hasPermission("readAll-user")) && {
+			label: "HR",
+			key: "hr",
+			icon: <TeamOutlined />,
+			children: [
+				{
+					label: (
+						<NavLink to='/admin/hr/staffs'>
+							<span>Staffs</span>
+						</NavLink>
+					),
+					key: "staffs",
+					icon: <UsergroupAddOutlined />,
+				},
+				{
+					label: (
+						<NavLink to='/admin/role'>
+							<span>Role & Permissions</span>
+						</NavLink>
+					),
+					key: "roleAndPermissions",
+					icon: <UserSwitchOutlined />,
+				},
+				{
+					label: (
+						<NavLink to='/admin/designation/'>
+							<span>Designation</span>
+						</NavLink>
+					),
+					key: "designation",
+					icon: <SolutionOutlined />,
+				},
+			],
 		},
 
-		// {
-		//   label: "SETTINGS",
-		//   key: "settings",
-		//   icon: <SettingOutlined />,
-		//   children: [
-		//     {
-		//       label: (
-		//         <NavLink to='/admin/invoice-setting'>
-		//           <span>Invoice Settings</span>
-		//         </NavLink>
-		//       ),
-		//       key: "invoiceSetting",
-		//       icon: <SettingOutlined />,
-		//     },
-		// ,
-		// {
-		//   label: (
-		//     <NavLink to='/admin/website-slider'>
-		//       <span>Ecom Image Slider</span>
-		//     </NavLink>
-		//   ),
-		//   key: "sliders",
-		//   icon: <UnorderedListOutlined />,
-		// },
-		// ],
-		// },
+		(hasPermission("create-saleInvoice") ||
+			hasPermission("readAll-saleInvoice")) && {
+			label: (
+				<NavLink to='/admin/pos'>
+					<span>POS</span>
+				</NavLink>
+			),
+			key: "pos",
+			icon: <ShoppingCartOutlined />,
+		},
+
+		{
+			label: "SETTINGS",
+			key: "settings",
+			icon: <SettingOutlined />,
+			children: [
+				{
+					label: (
+						<NavLink to='/admin/invoice-setting'>
+							<span>Invoice Settings</span>
+						</NavLink>
+					),
+					key: "invoiceSetting",
+					icon: <SettingOutlined />,
+				},
+
+				/* {
+					label: (
+						<NavLink to='/admin/website-slider'>
+							<span>Ecom Image Slider</span>
+						</NavLink>
+					),
+					key: "sliders",
+					icon: <UnorderedListOutlined />,
+				}, */
+			],
+		},
 	];
 
 	return (

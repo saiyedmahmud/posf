@@ -281,9 +281,9 @@ const DetailSale = () => {
 						</Card>
 						<SaleProductListCard list={singleSaleInvoice.saleInvoiceProduct} />
 
-						{/* <ReturnSaleInvoiceList list={returnSaleInvoice} />
+						{/* 			<ReturnSaleInvoiceList list={returnSaleInvoice} /> */}
 
-						<TransactionSaleList list={transactions} /> */}
+						<TransactionSaleList list={transactions} />
 					</Fragment>
 				) : (
 					<Loader />

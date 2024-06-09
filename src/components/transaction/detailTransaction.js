@@ -10,69 +10,68 @@ import "./transaction.css";
 
 import moment from "moment";
 import {
-  clearTransaction,
-  loadTransaction,
+	clearTransaction,
+	loadTransaction,
 } from "../../redux/rtk/features/transaction/transactionSlice.js";
 
 //PopUp
 
 const DetailTransaction = () => {
-  const { id } = useParams();
-  let navigate = useNavigate();
+	const { id } = useParams();
+	let navigate = useNavigate();
 
-  //dispatch
-  const dispatch = useDispatch();
-  const payment = useSelector((state) => state.transactions.transaction);
+	//dispatch
+	const dispatch = useDispatch();
+	const payment = useSelector((state) => state.transactions.transaction);
 
-  //Delete Supplier
-  const onDelete = () => {
-    try {
-      // dispatch(deleteSupplierPayment(id));
+	//Delete Supplier
+	const onDelete = () => {
+		try {
+			// dispatch(deleteSupplierPayment(id));
 
-      setVisible(false);
-      toast.warning(`Transaction : ${payment.id} is removed `);
-      return navigate("/admin/payment");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  // Delete Supplier PopUp
-  const [visible, setVisible] = useState(false);
+			setVisible(false);
+			toast.warning(`Transaction : ${payment.id} is removed `);
+			return navigate("/admin/payment");
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+	// Delete Supplier PopUp
+	const [visible, setVisible] = useState(false);
 
-  const handleVisibleChange = (newVisible) => {
-    setVisible(newVisible);
-  };
+	const handleVisibleChange = (newVisible) => {
+		setVisible(newVisible);
+	};
 
-  useEffect(() => {
-    dispatch(loadTransaction(id));
-    return () => {
-      dispatch(clearTransaction());
-    };
-  }, [id]);
+	useEffect(() => {
+		dispatch(loadTransaction(id));
+		return () => {
+			dispatch(clearTransaction());
+		};
+	}, [id]);
 
-  const isLogged = Boolean(localStorage.getItem("isLogged"));
+	const isLogged = Boolean(localStorage.getItem("isLogged"));
 
-  if (!isLogged) {
-    return <Navigate to={"/admin/auth/login"} replace={true} />;
-  }
+	if (!isLogged) {
+		return <Navigate to={"/admin/auth/login"} replace={true} />;
+	}
 
-  return (
-    <div>
-      <div className='mr-top'>
-        {payment ? (
-          <Fragment key={payment.id}>
-            <Card bordered={false} className='card-custom'>
-              <div
-                className='card-header d-flex justify-content-between mb-2'
-                style={{ padding: 0 }}
-              >
-                <h5>
-                  <SolutionOutlined />
-                  <span className='mr-left'>
-                    ID : {payment.id} | {payment.date}
-                  </span>
-                </h5>
-                <div className='text-end'>
+	return (
+		<div>
+			<div className='mr-top'>
+				{payment ? (
+					<Fragment key={payment.id}>
+						<Card bordered={false} className='card-custom'>
+							<div
+								className='card-header d-flex justify-content-between mb-2'
+								style={{ padding: 0 }}>
+								<h5>
+									<SolutionOutlined />
+									<span className='mr-left'>
+										ID : {payment.id} | {payment.date}
+									</span>
+								</h5>
+								{/* <div className='text-end'>
                   <Popover
                     content={
                       <a onClick={onDelete}>
@@ -92,38 +91,38 @@ const DetailTransaction = () => {
                       icon={<DeleteOutlined />}
                     ></Button>
                   </Popover>
-                </div>
-              </div>
-              <div>
-                <p>
-                  <Typography.Text className='font-semibold'>
-                    Date :
-                  </Typography.Text>{" "}
-                  {moment(payment.date).format("YYYY-MM-DD")}
-                </p>
+                </div> */}
+							</div>
+							<div>
+								<p>
+									<Typography.Text className='font-semibold'>
+										Date :
+									</Typography.Text>{" "}
+									{moment(payment.date).format("YYYY-MM-DD")}
+								</p>
 
-                <p>
-                  <Typography.Text strong>Amount :</Typography.Text>{" "}
-                  {payment.amount}
-                </p>
+								<p>
+									<Typography.Text strong>Amount :</Typography.Text>{" "}
+									{payment.amount}
+								</p>
 
-                <p>
-                  <Typography.Text strong>Particulars :</Typography.Text>{" "}
-                  {payment.particulars}
-                </p>
-                <p>
-                  <Typography.Text strong>Type :</Typography.Text>{" "}
-                  {payment.type}
-                </p>
-              </div>
-            </Card>
-          </Fragment>
-        ) : (
-          <Loader />
-        )}
-      </div>
-    </div>
-  );
+								<p>
+									<Typography.Text strong>Particulars :</Typography.Text>{" "}
+									{payment.particulars}
+								</p>
+								<p>
+									<Typography.Text strong>Type :</Typography.Text>{" "}
+									{payment.type}
+								</p>
+							</div>
+						</Card>
+					</Fragment>
+				) : (
+					<Loader />
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default DetailTransaction;

@@ -16,11 +16,13 @@ import "./pos.css";
 export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 	const dispatch = useDispatch();
 	const list = useSelector((state) => state.products.list);
+
 	const { list: subCategory } =
 		useSelector((state) => state.productSubCategories) || {};
 	const [loading, setLoading] = useState(false);
 
 	const [finalSubCat, setfinalSubCat] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	useEffect(() => {
 		const subCategoryToGetAllProd = {
@@ -38,6 +40,7 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 
 	const [totalProd, setTotalProd] = useState(0);
 	const [prodList, setProdList] = useState(null);
+	const [categoryId, setCategoryId] = useState(0);
 
 	useEffect(() => {
 		dispatch(loadProduct({ status: "true", page: 1, count: 10 }));
@@ -53,12 +56,14 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 	}, [list]);
 
 	const handleSubCatChange = (catId) => {
+		setSelectedCategory(catId); // Update selected category
 		if (catId === 0) {
 			dispatch(loadAllProductSubCategory({ page: 1, count: 100 }));
 			setProdList(list);
 		} else {
 			dispatch(loadSingleProductSubCategory(catId));
 			setProdList(null);
+			setCategoryId(catId);
 		}
 	};
 
@@ -137,9 +142,12 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 
 	// Single Product Search Function
 	const [form] = Form.useForm();
+	console.log(categoryId);
 
 	const onFinish = async (values) => {
-		const resp = await dispatch(loadPosProduct(values.s_id));
+		const resp = await dispatch(
+			loadPosProduct({ id: values.s_id, categoryId: categoryId })
+		);
 
 		if (values.s_id === undefined) {
 			setLoading(false);
@@ -148,6 +156,9 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 		if (resp.payload.status === "success") {
 			setProdList(resp.payload.data);
 			form.resetFields();
+
+			setCategoryId(null);
+			setSelectedCategory(null); // Reset selected category
 			setLoading(false);
 		}
 	};
@@ -167,7 +178,7 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 						onFinishFailed={onFinishFailed}
 						autoComplete='off'>
 						<Form.Item name='s_id'>
-							<Input placeholder='Search Product' />
+							<Input placeholder='Search Product' width={50} />
 						</Form.Item>
 
 						<Form.Item>
@@ -182,7 +193,7 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 					</Form>
 				</div>
 
-				<div className='mt-4'>
+				{/* <div className='mt-4'>
 					<Select
 						name='productSubCategoryId'
 						loading={!subCategory}
@@ -190,6 +201,7 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 						style={{
 							width: 200,
 						}}
+						value={selectedCategory}
 						onChange={handleSubCatChange}
 						placeholder='Select Subcategory'
 						optionFilterProp='children'
@@ -206,7 +218,7 @@ export default function ProductsForSale({ form: MainForm, totalCalculator }) {
 								</Select.Option>
 							))}
 					</Select>
-				</div>
+				</div> */}
 			</div>
 			<Row className='mt-4' gutter={[20, 20]}>
 				{prodList ? (

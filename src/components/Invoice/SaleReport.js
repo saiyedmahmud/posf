@@ -144,7 +144,6 @@ const PrintToPdf = forwardRef(
 					</div>
 					<div className='box12'>
 						<hr />
-						<p>Powered by Potato Squad | Contact: 01885 996601</p>
 					</div>
 				</div>
 			</Fragment>

@@ -67,11 +67,19 @@ export const loadSingleProduct = createAsyncThunk(
 
 export const loadPosProduct = createAsyncThunk(
 	"product/loadPosProduct",
-	async (id) => {
+	async ({ id, categoryId }) => {
+		console.log(id, categoryId);
 		try {
-			const { data } = await axios.get(`product?query=search&prod=${id}`);
+			if (categoryId && id) {
+				const { data } = await axios.get(
+					`product?query=filter&prod=${id}&category=${categoryId}`
+				);
+				return { status: "success", data: data };
+			} else {
+				const { data } = await axios.get(`product?query=search&prod=${id}`);
 
-			return { status: "success", data: data };
+				return { status: "success", data: data };
+			}
 		} catch (error) {
 			console.log(error.message);
 		}
